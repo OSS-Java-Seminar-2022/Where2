@@ -14,6 +14,7 @@ Where2 is an application that allows you to find out about all the events and ha
 * Suggestions
 * Notifications
 ## Database model
+![Database model and app descrption](https://github.com/BartulGasperov/Where2/blob/main/c86343ce-15ab-42e9-b148-b625536cc859.jpg?raw=true)
 ## Technologies
 * Java
 * Spring Boot
