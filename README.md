@@ -3,9 +3,9 @@
 # Table of Contents 📚
 * [ General Info ](general-info)
 * [ Features ](features)
-* [ Database model ]
-* [ Technologies ]
-* [ Authors ]
+* [ Database model ](Database-model)
+* [ Technologies ](Technologies)
+* [ Authors ](Authors)
 
 ## General Info
 ## Features 
