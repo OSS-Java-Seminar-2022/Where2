@@ -1,10 +1,10 @@
 # Where2
 ## Table of Contents 📚
-* [ General Info ](#general-info)
-* [ Features ](#features)
-* [ Database model ](#database-model)
-* [ Technologies ](#technologies)
-* [ Authors ](#authors)
+* [ General Info ](#general-info-%E2%84%B9%EF%B8%8F)
+* [ Features ](#features-%EF%B8%8F)
+* [ Database model ](#database-model-)
+* [ Technologies ](#general-info-%E2%84%B9%EF%B8%8F)
+* [ Authors ](#authors-)
 
 ## General Info ℹ️
 Where2 is an application that allows you to find out about all the events and happenings in the city in a few clicks, such as live music, restaurant promotions and nightlife.
