@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Where2Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Where2Application.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(Where2Application.class, args);
+    }
 }
