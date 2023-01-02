@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Visitors</title>
+</head>
+<body>
+    <h1>All Visitors</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="visitor :${visitors}">
+            <td th:text="${visitor.name}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>
