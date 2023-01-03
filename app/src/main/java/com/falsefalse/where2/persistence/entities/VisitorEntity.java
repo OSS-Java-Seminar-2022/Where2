@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class VisitorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
 
     String name;
