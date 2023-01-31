@@ -22,5 +22,3 @@ Where2 is an application that allows you to find out about all the events and ha
 * SQL
 ## Authors 👨‍💻
 * Bartul Gašperov
-* Josip Marinović
-* Mario Miletić
