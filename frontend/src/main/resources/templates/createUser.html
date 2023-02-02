@@ -2,10 +2,10 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create visitor</title>
+    <title>Create User</title>
 </head>
 <body>
-    <form method="post" action="#" th:action="@{/visitors/new}" th:object="${newVisitor}" name="visitorName">
+    <form method="post" action="#" th:action="@{/users}" th:object="${newUserModel}" name="userName">
         <label for="fname">Name:</label>
         <input type="text" id="fname" th:field="*{name}" >
         <input type="submit" Value="Submit">

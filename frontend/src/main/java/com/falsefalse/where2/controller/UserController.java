@@ -1,8 +1,7 @@
-package com.falsefalse.where2.rest;
+package com.falsefalse.where2.controller;
 
-import com.falsefalse.where2.models.Visitor;
-import com.falsefalse.where2.service.VisitorService;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.falsefalse.where2.models.UserModel;
+import com.falsefalse.where2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,32 +11,32 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/visitors")
-public class VisitorController {
+public class UserController {
 
     @Autowired
-    VisitorService visitorService;
+    UserService userService;
 
     @GetMapping()
     String getVisitors (Model model) throws IOException, InterruptedException {
-        model.addAttribute("visitors", visitorService.getAll());
+        model.addAttribute("visitors", userService.getAll());
         return "allVisitors";
     }
 
     @GetMapping("{id}")
     String getVisitors (@PathVariable Integer id, Model model) throws IOException, InterruptedException {
-        model.addAttribute("visitor", visitorService.get(id));
+        model.addAttribute("visitor", userService.get(id));
         return "visitor";
     }
 
     @GetMapping("/new")
     String createVisitor (Model model) {
-        model.addAttribute("newVisitor", new Visitor());
+        model.addAttribute("newVisitor", new UserModel());
         return "createVisitor";
     }
 
     @PostMapping(value = "/new")
-    String createVisitor (@ModelAttribute Visitor newVisitor, Model model) throws IOException, InterruptedException {
-        model.addAttribute("visitor", visitorService.create(newVisitor));
+    String createVisitor (@ModelAttribute UserModel newUserModel, Model model) throws IOException, InterruptedException {
+        model.addAttribute("visitor", userService.create(newUserModel));
         return "visitor";
     }
 }
