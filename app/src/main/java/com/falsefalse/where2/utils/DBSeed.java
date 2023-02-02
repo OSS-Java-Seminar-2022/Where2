@@ -15,13 +15,13 @@ public class DBSeed implements CommandLineRunner {
     public void run(String... args) throws Exception {
         userRepository.save(UserEntity.builder()
                 .displayName("Josip Marinovic")
-                .userName("ljigavac96")
+                .username("ljigavac96")
                 .password("sveucilisnaKnjiznica")
                 .build());
 
         userRepository.save(UserEntity.builder()
                 .displayName("Mario Mileni")
-                .userName("milethicc")
+                .username("milethicc")
                 .password("zlopolje1950")
                 .build());
     }
