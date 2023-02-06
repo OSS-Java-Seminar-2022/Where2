@@ -1,4 +1,4 @@
-package com.falsefalse.where2.service;
+package com.falsefalse.where2.service.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

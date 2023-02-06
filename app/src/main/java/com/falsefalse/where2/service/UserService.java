@@ -4,6 +4,7 @@ import com.falsefalse.where2.models.UserModel;
 import com.falsefalse.where2.persistence.repositories.UserRepository;
 import com.falsefalse.where2.service.mapper.UserMapper;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
 
     private final static String NO_SUCH_ELEMENT_EXCEPTION_MESSAGE = "NoSuchElementException: User with [id: %s] not found!";
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public List<UserModel> getAll() {
         return userRepository.findAll().stream().map(UserMapper.INSTANCE::fromEntity).toList();

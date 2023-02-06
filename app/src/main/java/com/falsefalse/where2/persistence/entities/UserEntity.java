@@ -1,10 +1,12 @@
 package com.falsefalse.where2.persistence.entities;
 
+import com.falsefalse.where2.persistence.entities.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +32,13 @@ public class UserEntity implements UserDetails {
     private String password;
 
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "subscribedToEvents",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<EventEntity> subscribedTo;
 
     @Enumerated(EnumType.STRING)
     private Role role;

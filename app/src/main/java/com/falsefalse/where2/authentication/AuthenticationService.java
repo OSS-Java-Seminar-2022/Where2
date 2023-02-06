@@ -1,9 +1,9 @@
 package com.falsefalse.where2.authentication;
 
-import com.falsefalse.where2.persistence.entities.Role;
+import com.falsefalse.where2.persistence.entities.enums.Role;
 import com.falsefalse.where2.persistence.entities.UserEntity;
 import com.falsefalse.where2.persistence.repositories.UserRepository;
-import com.falsefalse.where2.service.JwtService;
+import com.falsefalse.where2.service.authentication.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
