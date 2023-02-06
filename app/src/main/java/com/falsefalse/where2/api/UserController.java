@@ -2,6 +2,7 @@ package com.falsefalse.where2.api;
 
 import com.falsefalse.where2.models.UserModel;
 import com.falsefalse.where2.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @GetMapping
     public List<UserModel> getAll() {
@@ -24,6 +26,7 @@ public class UserController {
         return userService.get(id);
     }
 
+    //todo: remove redundant
     @PostMapping
     public UserModel create(@RequestBody UserModel newUserModel) {
         return userService.create(newUserModel);
