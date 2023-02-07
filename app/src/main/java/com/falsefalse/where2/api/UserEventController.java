@@ -16,7 +16,8 @@ public class UserEventController {
 
     @PatchMapping("{event_id}")
     public HttpStatus subscribe(@PathVariable Integer event_id){
-        var user_id = userRepository.findByUsername(CurrentUser.get().getUsername()).orElseThrow().getId();
+        var dummyUser = "username";
+        var user_id = userRepository.findByUsername(dummyUser).orElseThrow().getId();
         return userEventService.subscribe(event_id, user_id);
     }
 }

@@ -7,7 +7,6 @@ import com.falsefalse.where2.persistence.entities.enums.Role;
 import com.falsefalse.where2.persistence.entities.UserEntity;
 import com.falsefalse.where2.persistence.repositories.EventRepository;
 import com.falsefalse.where2.persistence.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,15 +23,13 @@ public class DBSeed implements CommandLineRunner {
     UserRepository userRepository;
     @Autowired
     EventRepository eventRepository;
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
         userRepository.save(UserEntity.builder()
                 .displayName("Bartul Gasperov")
                 .username("bgasperov")
-                .password(passwordEncoder.encode("my_Strong_Password"))
+                .password("my_Strong_Password")
                 .email("bg46685@unist.hr")
                 .role(Role.ADMIN)
                 .build());
@@ -40,7 +37,7 @@ public class DBSeed implements CommandLineRunner {
         userRepository.save(UserEntity.builder()
                 .displayName("Josip Marinovic")
                 .username("ljigavac96")
-                .password(passwordEncoder.encode("sveucilisnaKnjiznica"))
+                .password("sveucilisnaKnjiznica")
                 .email("jm342342@unist.hr")
                 .role(Role.USER)
                 .build());
@@ -48,7 +45,7 @@ public class DBSeed implements CommandLineRunner {
         var marioMileni = UserEntity.builder()
                 .displayName("Mario Mileni")
                 .username("milethicc")
-                .password(passwordEncoder.encode("zlopolje1950"))
+                .password("zlopolje1950")
                 .email("mm342328@unist.hr")
                 .role(Role.USER)
                 .build();
