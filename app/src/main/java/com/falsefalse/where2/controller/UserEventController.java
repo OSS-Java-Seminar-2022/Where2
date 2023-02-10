@@ -19,7 +19,7 @@ public class UserEventController {
     @GetMapping("/subscribe/{eventId}")
     public String subscribe(@PathVariable Integer eventId) {
         var username = SecurityUtil.getSessionUser();
-        if (username == null) return "/login";
+        if (username == null) return "redirect:/login";
 
         var userId = userRepository.findByUsername(username).orElseThrow().getId();
         userEventService.subscribe(eventId, userId);
@@ -29,7 +29,7 @@ public class UserEventController {
     @GetMapping("/unsubscribe/{eventId}")
     public String unsubscribe(@PathVariable Integer eventId) {
         var username = SecurityUtil.getSessionUser();
-        if (username == null) return "/login";
+        if (username == null) return "redirect:/login";
         var userId = userRepository.findByUsername(username).orElseThrow().getId();
         userEventService.unsubscribe(eventId, userId);
         return "redirect:/events";

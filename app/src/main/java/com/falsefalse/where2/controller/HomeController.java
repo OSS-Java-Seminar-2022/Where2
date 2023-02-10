@@ -16,7 +16,6 @@ public class HomeController {
 
     @GetMapping()
     public String home(Model model) {
-        System.out.println(followingService.getFollowing());
         model.addAttribute("subs", followingService.getFollowing());
         return "index";
     }
