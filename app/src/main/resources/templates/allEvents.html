@@ -1,0 +1,44 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div th:if="${param.exception}" class="alert alert-danger">
+            <p>Something went wrong.</p>
+        </div>
+        <div th:if="${param.success}" class="alert alert-success">
+            You have registered successfully.
+        </div>
+        <div class="container text-center align-content-center">
+            <div class="row justify-content-start">
+                <div class="col-6 offset-md-3">
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col" th:each="event: ${events}">
+                            <div class="card">
+                                <img th:src="@{${event.imageUrl}}" class="card-img-top" th:alt="${event.name}">
+                                <div class="card-body">
+                                    <a th:href="@{${#ctx.springRequestContext.requestUri}+'/'+${event.id}}"
+                                       type="button"
+                                       th:text="${event.name}"
+                                       class="card-title"></a>
+                                    <br>
+                                    <a th:if="${#lists.contains(subs, event.id)}"
+                                       th:href="@{'event/unsubscribe/' + ${event.id}}" type="button"
+                                       class="btn btn-secondary btn-sm">Unfollow</a>
+                                    <a th:if="${!#lists.contains(subs, event.id)}"
+                                       th:href="@{'event/subscribe/' + ${event.id}}" type="button"
+                                       class="btn btn-primary btn-sm">Follow</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

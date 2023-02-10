@@ -1,9 +1,8 @@
-package com.falsefalse.where2.api;
+package com.falsefalse.where2.controller.api;
 
 import com.falsefalse.where2.models.UserModel;
 import com.falsefalse.where2.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +23,6 @@ public class UserController {
     @GetMapping("{id}")
     public UserModel get(@PathVariable Integer id) {
         return userService.get(id);
-    }
-
-    //todo: remove redundant
-    @PostMapping
-    public UserModel create(@RequestBody UserModel newUserModel) {
-        return userService.create(newUserModel);
     }
 
     @PutMapping("{id}")

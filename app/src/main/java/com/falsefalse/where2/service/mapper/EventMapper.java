@@ -9,14 +9,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface EventMapper {
-
     EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
-
-    EventModel fromEntity(EventEntity eventEntity);
 
     EventEntity toEntity(EventModel eventModel);
 
+    EventModel fromEntity(EventEntity eventEntity);
+    
     @Mapping(target = "id", ignore = true)
     void updateEntity(EventModel eventModel, @MappingTarget EventEntity eventEntity);
 }
-

@@ -1,13 +1,17 @@
 package com.falsefalse.where2.service;
 
+import com.falsefalse.where2.dto.RegistrationDto;
 import com.falsefalse.where2.models.UserModel;
+import com.falsefalse.where2.persistence.entities.UserEntity;
+import com.falsefalse.where2.persistence.entities.enums.Role;
 import com.falsefalse.where2.persistence.repositories.UserRepository;
 import com.falsefalse.where2.service.mapper.UserMapper;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -17,6 +21,7 @@ public class UserService {
 
     private final static String NO_SUCH_ELEMENT_EXCEPTION_MESSAGE = "NoSuchElementException: User with [id: %s] not found!";
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public List<UserModel> getAll() {
         return userRepository.findAll().stream().map(UserMapper.INSTANCE::fromEntity).toList();
@@ -27,9 +32,30 @@ public class UserService {
                 .orElseThrow(() -> new NoSuchElementException(String.format(NO_SUCH_ELEMENT_EXCEPTION_MESSAGE, id))));
     }
 
-    public UserModel create(UserModel newUserModel) {
-        var created = userRepository.save(UserMapper.INSTANCE.toEntity(newUserModel));
-        return UserMapper.INSTANCE.fromEntity(created);
+    public UserModel get(String username) {
+        return UserMapper.INSTANCE.fromEntity(userRepository.findByUsername(username)
+                .orElseThrow(() -> new NoSuchElementException(String.format(NO_SUCH_ELEMENT_EXCEPTION_MESSAGE, username))));
+    }
+
+    public UserEntity getEntity(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new NoSuchElementException(String.format(NO_SUCH_ELEMENT_EXCEPTION_MESSAGE, username)));
+    }
+
+    public boolean existByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean existByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public void register(RegistrationDto newUserModel) {
+        var created = UserMapper.INSTANCE.toEntity(newUserModel);
+        created.setRoles(List.of(Role.USER));
+        created.setEvents(new ArrayList<>());
+        created.setPassword(passwordEncoder.encode(newUserModel.getPassword()));
+        userRepository.save(created);
     }
 
     public UserModel update(Integer id, UserModel newUserModel) {
