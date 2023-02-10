@@ -4,18 +4,13 @@ import com.falsefalse.where2.models.EventModel;
 import com.falsefalse.where2.models.VenueModel;
 import org.springframework.stereotype.Service;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static java.util.Objects.isNull;
 
 @Service
 public class Validator {
     public void validate(VenueModel venue) {
-        Pattern pattern = Pattern.compile("\"[0-9a-zA-z_]+\"");
-        Matcher matcher = pattern.matcher(venue.getName());
-        if (venue.getName().isBlank() || isNull(venue.getName()) || !matcher.matches())
-            throw new IllegalArgumentException("Invalid name.");
+        if (venue.getName().isBlank() || isNull(venue.getName()))
+            throw new IllegalArgumentException("Invalid venue name.");
 
         if (isNull(venue.getVenueType()))
             throw new IllegalArgumentException("Venue type not selected.");
@@ -25,15 +20,13 @@ public class Validator {
     }
 
     public void validate(EventModel event) {
-        Pattern pattern = Pattern.compile("\"[0-9a-zA-z_]+\"");
-        Matcher matcher = pattern.matcher(event.getName());
-        if (event.getName().isBlank() || isNull(event.getName()) || !matcher.matches())
-            throw new IllegalArgumentException("Invalid name.");
+        if (event.getName().isBlank() || isNull(event.getName()))
+            throw new IllegalArgumentException("Invalid event name.");
 
         if (isNull(event.getEventType()))
             throw new IllegalArgumentException("Event type not selected.");
 
-        if (isNull(event.getVenue()))
+        if (isNull(event.getVenueId()))
             throw new IllegalArgumentException("Venue not selected.");
     }
 }
