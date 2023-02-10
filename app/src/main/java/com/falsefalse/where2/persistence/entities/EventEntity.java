@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -26,19 +27,30 @@ public class EventEntity {
     // notifications
     @Enumerated(EnumType.STRING)
     private EventType eventType;
+    private String imageUrl;
     //image gallery
     //event banner
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startingTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endingTime;
-    @ManyToMany(mappedBy = "subscribedTo")
-    private List<UserEntity> subscribedUsers;
+    @ManyToMany(mappedBy = "events")
+    private List<UserEntity> users;
     private float price;
     @Enumerated(EnumType.STRING)
     private Currency currency;
     private boolean isRecurring;
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false)
+    private UserEntity createdBy;
+    private String description;
+    @ManyToOne
+    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "venue", nullable = false)
+    private VenueEntity venue;
 
-    public void subscribe(UserEntity user){
-        this.getSubscribedUsers().add(user);
-        user.getSubscribedTo().add(this);
+    public void subscribe(UserEntity user) {
+        this.getUsers().add(user);
+        user.getEvents().add(this);
     }
 }

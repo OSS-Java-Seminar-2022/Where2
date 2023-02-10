@@ -1,0 +1,47 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sec="http://www.thymeleaf.org"
+        layout:decorate="~{layout}"
+>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div th:if="${param.exception}" class="alert alert-danger">
+            <p>Something went wrong.</p>
+        </div>
+        <div th:if="${param.success}" class="alert alert-success">
+            You have registered successfully.
+        </div>
+
+        <div class="container text-center align-content-center">
+            <div class="row justify-content-start">
+                <h3 sec:authorize="!isAuthenticated()">Welcome to Where2</h3>
+                <h3 sec:authorize="isAuthenticated()" th:if="${#lists.size(subs) <1}">You didn't follow anything
+                    yet!</h3>
+            </div>
+        </div>
+
+        <div class="container text-center align-content-center">
+            <div class="row justify-content-start">
+                <div class="col-6 offset-md-3">
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col" th:each="sub: ${subs}">
+                            <div class="card">
+                                <img th:src="@{${sub.imageUrl}}" class="card-img-top" th:alt="${sub.name}">
+                                <div class="card-body">
+                                    <h5 th:text="${sub.name}"
+                                        class="card-title"></h5>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

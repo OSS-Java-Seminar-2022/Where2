@@ -1,4 +1,4 @@
-package com.falsefalse.where2.authentication;
+package com.falsefalse.where2.models.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

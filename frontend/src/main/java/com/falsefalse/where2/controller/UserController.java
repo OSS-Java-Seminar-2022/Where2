@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/visitors")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     UserService userService;
 
     @GetMapping()
-    String getVisitors (Model model) throws IOException, InterruptedException {
-        model.addAttribute("visitors", userService.getAll());
-        return "allVisitors";
+    String getUsers (Model model) throws IOException, InterruptedException {
+        model.addAttribute("users", userService.getAll());
+        return "allUsers";
     }
 
     @GetMapping("{id}")
-    String getVisitors (@PathVariable Integer id, Model model) throws IOException, InterruptedException {
-        model.addAttribute("visitor", userService.get(id));
-        return "visitor";
+    String getUser (@PathVariable Integer id, Model model) throws IOException, InterruptedException {
+        model.addAttribute("user", userService.get(id));
+        return "userProfile";
     }
 
     @GetMapping("/new")
     String createVisitor (Model model) {
-        model.addAttribute("newVisitor", new UserModel());
-        return "createVisitor";
+        model.addAttribute("newUser", new UserModel());
+        return "createUser";
     }
 
     @PostMapping(value = "/new")
     String createVisitor (@ModelAttribute UserModel newUserModel, Model model) throws IOException, InterruptedException {
-        model.addAttribute("visitor", userService.create(newUserModel));
-        return "visitor";
+        model.addAttribute("user", userService.create(newUserModel));
+        return "userProfile";
     }
 }

@@ -1,0 +1,51 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Create Event</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container text-center align-content-center">
+            <div class="row justify-content-start">
+                <div class="col-4 offset-md-4">
+
+                    <div class="form-group">
+                        <form method="post" role="form" th:action="@{/venues/create/save}" th:object="${venue}">
+
+                            <label for="name" class="form-label">Venue name</label>
+                            <div class="mb-3" id="name">
+                                <input th:field="*{name}" type="text" class="form-control" placeholder="Venue name">
+                            </div>
+
+                            <label for="venueType" class="form-label">Venue Type</label>
+                            <div id="venueType" class="mb-3">
+                                <select th:field="*{venueType}" class="form-control selectpicker">
+                                    <option value="">Select venue type</option>
+                                    <option th:each="type: ${types}" th:value="${type}" th:text="${type}"></option>
+                                </select>
+                            </div>
+
+                            <label for="name" class="form-label">Event name</label>
+                            <div class="mb-3" id="workingHours">
+                                <input th:field="*{workingHours}" type="text" class="form-control"
+                                       placeholder="08:00 - 22:00">
+                            </div>
+
+                            <label for="imageUrl" class="form-label">Image URL</label>
+                            <div class="mb-3" id="imageUrl">
+                                <input th:field="*{imageUrl}" type="text" class="form-control" placeholder="Image URL">
+                            </div>
+                            <button onclick="history.back()" type="button" class="btn btn-secondary">Back</button>
+                            <button class="btn btn-primary" type="submit">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

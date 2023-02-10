@@ -1,0 +1,98 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Create Event</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container text-center align-content-center">
+            <div class="row justify-content-start">
+                <div class="col-4 offset-md-4">
+
+                    <div class="form-group">
+                        <form th:method="put" role="form" th:action="@{'/events/edit/save/'+${event.id}}"
+                              th:object="${event}">
+
+                            <label for="name" class="form-label">Event name</label>
+                            <div class="mb-3" id="name">
+                                <input th:field="*{name}" th:value="${name}" type="text" class="form-control"
+                                       placeholder="Event name">
+                            </div>
+
+                            <label for="venue" class="form-label">Venue</label>
+                            <div id="venue" class="mb-3">
+                                <select th:field="*{venueId}" class="form-control selectpicker">
+                                    <option th:each="venue: ${venues}" th:value="${venue.id}"
+                                            th:text="${venue.name}"></option>
+                                </select>
+                            </div>
+
+                            <label for="eventType" class="form-label">Event Type</label>
+                            <div id="eventType" class="mb-3">
+                                <select th:field="*{eventType}" th:value="${eventType}"
+                                        class="form-control selectpicker">
+                                    <option th:each="type: ${types}" th:value="${type}" th:text="${type}"></option>
+                                </select>
+                            </div>
+
+                            <label for="starts" class="form-label">Starts</label>
+                            <div class="mb-3" id="starts">
+                                <input th:field="*{startingTime}"
+                                       th:value="${#dates.format(event.startingTime, 'dd.MM.yyyy HH:mm')}"
+                                       type="datetime-local"
+                                       class="form-control"
+                                       placeholder="Event start">
+                            </div>
+
+                            <label for="ends" class="form-label">Ends</label>
+                            <div class="mb-3" id="ends">
+                                <input th:field="*{endingTime}" th:value="${endingTime}" type="datetime-local"
+                                       class="form-control"
+                                       placeholder="Event ends">
+                            </div>
+
+                            <label for="price" class="form-label">Entrance Fee</label>
+                            <div class="input-group mb-3" id="price">
+                                <span class="input-group-text">
+                                    <select th:field="*{currency}" class="form-control selectpicker"
+                                            th:value="${currency}">
+                                        <option th:each="currency: ${currencies}" th:value="${currency}"
+                                                th:text="${currency}"></option>
+                                    </select>
+                                </span>
+                                <input type="text" th:field="*{price}" class="form-control" th:value="${price}"
+                                       aria-label="Amount (to the nearest dollar)">
+                                <span class="input-group-text">.00</span>
+                            </div>
+
+                            <label for="imageUrl" class="form-label">Image URL</label>
+                            <div class="mb-3" id="imageUrl">
+                                <input th:field="*{imageUrl}" th:value="${imageUrl}" type="text"
+                                       class="form-control" placeholder="Image URL">
+                            </div>
+
+                            <label for="name" class="form-label">Event Description</label>
+                            <div class="mb-3" id="desc">
+                                <div class="form-floating">
+                                    <textarea class="form-control" th:field="*{description}"
+                                              th:value="${description}"
+                                              placeholder="Say something about the event." id="floatingTextarea2"
+                                              style="height: 100px"></textarea>
+                                    <label for="floatingTextarea2">Description</label>
+                                </div>
+                            </div>
+
+                            <button onclick="history.back()" type="button" class="btn btn-secondary">Back</button>
+                            <button class="btn btn-primary" value="Log in" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

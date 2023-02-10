@@ -1,6 +1,8 @@
 package com.falsefalse.where2.service;
 
 import com.falsefalse.where2.models.UserModel;
+import com.falsefalse.where2.models.auth.AuthenticationResponse;
+import com.falsefalse.where2.models.auth.RegisterRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +24,15 @@ public class UserService {
         var json = client.get("http://localhost:7070/users/"+id);
         return mapper.readValue(json, UserModel.class);
     }
-    public UserModel create(UserModel newUserModel) throws IOException, InterruptedException {
-        var json = mapper.writeValueAsString(newUserModel);
+    public UserModel create(UserModel user) throws IOException, InterruptedException {
+        var registerRequest = new RegisterRequest().builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .displayName(user.getDisplayName())
+                .build();
+        var json = mapper.writeValueAsString(registerRequest);
         var response = client.post("http://localhost:7070/users", json);
-        return mapper.readValue(json, UserModel.class);
+        var authorizedUser = mapper.readValue(json, AuthenticationResponse.class);
     }
 }
